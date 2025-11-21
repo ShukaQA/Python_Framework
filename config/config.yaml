@@ -1,0 +1,5 @@
+base_url: "https://api.openweathermap.org/data/2.5"
+api_key: "aea0c65ef5da92f3d4ad5d0a6a965479"
+default_city: "London"
+default_lat: 41.7272512
+default_lon: 44.4771395
