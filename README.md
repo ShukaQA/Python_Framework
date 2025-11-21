@@ -1,20 +1,26 @@
 # Weather API Test Automation Framework
 
-## Stack
-- Python 3.x
-- Pytest
-- Requests
-- PyYAML
-- Pytest-HTML
+## Overview
+This framework provides automated tests for the **Weather API** (OpenWeatherMap), covering endpoints for current weather and forecast data.
 
+---
 
-### Create a virtual environment
-python -m venv .venv
+## Technology Stack
+- **Python 3.x** – Programming language  
+- **Pytest** – Test framework  
+- **Requests** – HTTP client for API calls  
+- **PyYAML** – Configuration management  
+- **Pytest-HTML** – HTML test reports  
 
-### Activate on Windows
-.venv\Scripts\activate
+---
 
-### Activate on Linux/Mac
-source .venv/bin/activate
+## How to Run Tests
 
-Using a virtual environment ensures project dependencies are isolated and reproducible across different machines.
+1. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+
+1. **Run all tests with HTML report**
+   ```bash
+   python -m pytest -v --html=report.html
+   
