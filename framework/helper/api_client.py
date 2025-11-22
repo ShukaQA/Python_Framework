@@ -1,24 +1,55 @@
 import requests
+from typing import Optional, Dict, Any
 from framework.logger import logger
 
-class APIClient:
-    def __init__(self, base_url):
-        self.base_url = base_url.rstrip("/")  # Remove trailing slash if any
+
+class HttpClient:
+    """
+    A simple HTTP client wrapper around requests.Session
+    to perform GET and POST requests with logging support.
+    """
+
+    def __init__(self, base_url: str):
+        """
+        Initialize the HTTP client with a base URL.
+
+        Args:
+            base_url (str): Base URL for all API requests.
+        """
+        self.base_url = base_url.rstrip("/")
         self.session = requests.Session()
 
     def _build_url(self, endpoint: str) -> str:
+        """
+        Construct the full URL for a given endpoint.
+
+        Args:
+            endpoint (str): API endpoint, e.g., '/weather'.
+
+        Returns:
+            str: Full URL.
+        """
         return f"{self.base_url}/{endpoint.lstrip('/')}"
 
-    def get(self, endpoint: str, params: dict = None, headers: dict = None):
-        url = self._build_url(endpoint)
-        logger.info(f"GET {url} | params={params}")
-        response = self.session.get(url, params=params, headers=headers)
-        logger.info(f"Response: {response.status_code}")
-        return response
+    def get(
+        self,
+        endpoint: str,
+        params: Optional[Dict[str, Any]] = None,
+        headers: Optional[Dict[str, str]] = None
+    ) -> requests.Response:
+        """
+        Send a GET request.
 
-    def post(self, endpoint: str, data: dict = None, json: dict = None, headers: dict = None):
+        Args:
+            endpoint (str): API endpoint.
+            params (dict, optional): Query parameters.
+            headers (dict, optional): Custom headers.
+
+        Returns:
+            requests.Response: Response object.
+        """
         url = self._build_url(endpoint)
-        logger.info(f"POST {url} | data={data} | json={json}")
-        response = self.session.post(url, data=data, json=json, headers=headers)
-        logger.info(f"Response: {response.status_code}")
+        response = self.session.get(url, params=params, headers=headers)
+        logger.info(f"{response.request} ---> : {response.url}")
+        logger.info(f"Response <--- {response.status_code} : {response.reason}")
         return response

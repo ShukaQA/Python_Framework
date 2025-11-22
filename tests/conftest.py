@@ -2,7 +2,7 @@ import pytest
 import yaml
 
 from framework.api.weather_api import WeatherAPI
-from framework.helper.api_client import APIClient
+from framework.helper.api_client import HttpClient
 
 
 @pytest.fixture(scope="session")
@@ -13,7 +13,7 @@ def config():
 
 @pytest.fixture(scope="session")
 def api_client(config):
-    return APIClient(config["base_url"])
+    return HttpClient(config["base_url"])
 
 
 @pytest.fixture(scope="session")

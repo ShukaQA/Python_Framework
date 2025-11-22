@@ -2,6 +2,11 @@ import logging
 import pprint
 
 class PrettyLogger:
+    """
+     A wrapper around the standard Python logger to provide
+     pretty-printed structured logs for easier debugging.
+     """
+    
     def __init__(self, name="weather_api"):
         self.logger = logging.getLogger(name)
         self.logger.setLevel(logging.DEBUG)
