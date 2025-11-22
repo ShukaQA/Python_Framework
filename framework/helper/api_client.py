@@ -1,5 +1,7 @@
-import requests
 from typing import Optional, Dict, Any
+
+import requests
+
 from framework.logger import logger
 
 
@@ -32,10 +34,10 @@ class HttpClient:
         return f"{self.base_url}/{endpoint.lstrip('/')}"
 
     def get(
-        self,
-        endpoint: str,
-        params: Optional[Dict[str, Any]] = None,
-        headers: Optional[Dict[str, str]] = None
+            self,
+            endpoint: str,
+            params: Optional[Dict[str, Any]] = None,
+            headers: Optional[Dict[str, str]] = None
     ) -> requests.Response:
         """
         Send a GET request.

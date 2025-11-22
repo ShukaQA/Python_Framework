@@ -1,5 +1,5 @@
-from framework.utils import assert_status_code
 from framework.logger import logger
+from framework.utils import assert_status_code
 
 
 def test_invalid_city(weather_api, config, invalid_city):

@@ -1,5 +1,5 @@
-from framework.utils import assert_status_code
 from framework.logger import logger
+from framework.utils import assert_status_code
 
 
 def test_invalid_api_key(weather_api, invalid_api_key, weather_cities):
