@@ -1,52 +1,24 @@
 import requests
 from framework.logger import logger
 
-
-def _log_request(method, url, params=None, data=None, json_body=None):
-    logger.info(f"➡ REQUEST: {method} {url}")
-    if params:
-        logger.info(f"  Query Params: {params}")
-    if data:
-        logger.info(f"  Data: {data}")
-    if json_body:
-        # Only print top-level keys for readability
-        keys = ", ".join(json_body.keys()) if isinstance(json_body, dict) else str(json_body)
-        logger.info(f"  JSON Body Keys: {keys}")
-
-
-def _log_response(response):
-    status = response.status_code
-    url = response.url
-    logger.info(f"⬅ RESPONSE: {status} {url}")
-
-    try:
-        body = response.json()
-        # Only print summary: top-level keys, city name, coord if exists
-        summary = {}
-        for key in ["coord", "weather", "main", "wind", "clouds", "name"]:
-            if key in body:
-                summary[key] = body[key]
-        logger.info(f"  Response Summary: {summary}")
-    except Exception:
-        # fallback if not JSON
-        logger.info(f"  Response Text: {response.text}")
-
-
 class APIClient:
     def __init__(self, base_url):
-        self.base_url = base_url
+        self.base_url = base_url.rstrip("/")  # Remove trailing slash if any
         self.session = requests.Session()
 
-    def get(self, endpoint, params=None):
-        url = f"{self.base_url}{endpoint}"
-        _log_request("GET", url, params=params)
-        response = self.session.get(url, params=params)
-        _log_response(response)
+    def _build_url(self, endpoint: str) -> str:
+        return f"{self.base_url}/{endpoint.lstrip('/')}"
+
+    def get(self, endpoint: str, params: dict = None, headers: dict = None):
+        url = self._build_url(endpoint)
+        logger.info(f"GET {url} | params={params}")
+        response = self.session.get(url, params=params, headers=headers)
+        logger.info(f"Response: {response.status_code}")
         return response
 
-    def post(self, endpoint, data=None, json=None):
-        url = f"{self.base_url}{endpoint}"
-        _log_request("POST", url, data=data, json_body=json)
-        response = self.session.post(url, data=data, json=json)
-        _log_response(response)
+    def post(self, endpoint: str, data: dict = None, json: dict = None, headers: dict = None):
+        url = self._build_url(endpoint)
+        logger.info(f"POST {url} | data={data} | json={json}")
+        response = self.session.post(url, data=data, json=json, headers=headers)
+        logger.info(f"Response: {response.status_code}")
         return response
