@@ -1,8 +1,8 @@
 import pytest
 import yaml
 
-from framework.api_client import APIClient
 from framework.api.weather_api import WeatherAPI
+from framework.helper.api_client import APIClient
 
 
 @pytest.fixture(scope="session")

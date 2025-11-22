@@ -1,6 +1,5 @@
 from framework.api.base_api import BaseAPI
 
-
 class WeatherAPI(BaseAPI):
 
     def get_current_weather(self, city, api_key):
