@@ -1,7 +1,9 @@
+import pytest
+
 from framework.logger import logger
 from framework.utils import assert_status_code
 
-
+@pytest.mark.negative_tests
 def test_invalid_city(weather_api, config, invalid_city):
     """
     Verify that the API returns 404 Not Found

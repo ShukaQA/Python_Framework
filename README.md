@@ -14,13 +14,22 @@ This framework provides automated tests for the **Weather API** (OpenWeatherMap)
 
 ---
 
-## How to Run Tests
+## How to Setup
 
 1. **Install dependencies**
    ```bash
    pip install -r requirements.txt
 
+## How to Run Tests
 1. **Run all tests with HTML report**
    ```bash
    python -m pytest -v --html=report.html
+   
+1. **Run positive tests with HTML report**
+   ```bash
+   python -m pytest -v -m positive_tests --html=negative_report.html
+
+1. **Run negative tests with HTML report**
+   ```bash
+   python -m pytest -v -m negative_tests --html=negative_report.html
    

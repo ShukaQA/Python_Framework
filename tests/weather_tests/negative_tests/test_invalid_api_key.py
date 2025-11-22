@@ -1,7 +1,9 @@
+import pytest
+
 from framework.logger import logger
 from framework.utils import assert_status_code
 
-
+@pytest.mark.negative_tests
 def test_invalid_api_key(weather_api, invalid_api_key, weather_cities):
     """
     Verify that the API returns 401 Unauthorized when an invalid API key is used.

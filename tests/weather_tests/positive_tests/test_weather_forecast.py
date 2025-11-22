@@ -1,7 +1,9 @@
+import pytest
+
 from framework.logger import logger
 from framework.utils import assert_status_code
 
-
+@pytest.mark.positive_tests
 def test_forecast_weather(weather_api, config, weather_cities):
     """
     Verify that the forecast API returns correct data for a list of cities.

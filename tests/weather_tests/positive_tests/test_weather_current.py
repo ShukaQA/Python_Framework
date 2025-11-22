@@ -1,7 +1,9 @@
+import pytest
+
 from framework.logger import logger
 from framework.utils import assert_status_code, assert_json_has_keys
 
-
+@pytest.mark.positive_tests
 def test_current_weather(weather_api, config, weather_cities):
     """
     Verify that the current weather API returns correct data
